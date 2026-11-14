@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings | MindSolve AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#f8fafc}
+a{text-decoration:none;color:inherit}
+.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0d1223;border-right:1px solid #202a40;padding:28px 17px}
+.logo{font-size:23px;font-weight:800;color:#a78bfa;padding:0 10px 35px}
+.logo span{color:white}
+.menu-title{font-size:11px;color:#64748b;letter-spacing:1px;margin:18px 10px}
+.nav{display:block;padding:13px 12px;border-radius:9px;color:#aab5ca;font-size:14px;margin:5px 0}
+.nav:hover,.nav.active{background:#38286e;color:white}
+.main{margin-left:245px;padding:35px 5%;max-width:1450px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+header p{color:#94a3b8;font-size:13px;margin-top:5px}
+.avatar{width:43px;height:43px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#2563eb);display:grid;place-items:center}
+.hero{background:linear-gradient(120deg,#191d3b,#172344);border:1px solid #37345f;border-radius:18px;padding:28px;margin-bottom:25px}
+.hero small{color:#c4b5fd;letter-spacing:2px}
+.hero h1{font-size:28px;margin:12px 0}
+.hero p{color:#aab8cf;font-size:14px;line-height:1.6}
+.panel{background:#11182a;border:1px solid #283650;border-radius:15px;padding:24px;margin-bottom:18px}
+.panel h3{font-size:17px;margin-bottom:7px}
+.desc{font-size:12px;color:#94a3b8;margin-bottom:20px}
+.setting{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 0;border-top:1px solid #283650}
+.setting b{display:block;font-size:14px;margin-bottom:5px}
+.setting small{color:#94a3b8;font-size:12px}
+input[type=checkbox]{width:19px;height:19px;accent-color:#8b5cf6;cursor:pointer}
+select{background:#0b1222;color:white;border:1px solid #303c55;padding:10px 13px;border-radius:8px;max-width:180px}
+button{cursor:pointer}
+.save{background:linear-gradient(100deg,#7c3aed,#4f46e5);border:0;color:white;padding:12px 22px;border-radius:9px;font-weight:700}
+.danger{border-color:#653344}
+.danger button{background:#4b1e2d;color:#fecdd3;border:1px solid #9f405a;padding:10px 16px;border-radius:8px}
+#message{color:#a78bfa;font-size:12px;margin-top:14px}
+footer{text-align:center;color:#64748b;font-size:12px;padding:25px 0}
+@media(max-width:750px){
+.sidebar{width:68px;padding:20px 7px}
+.logo{font-size:0;padding:10px 8px 30px}
+.logo:first-letter{font-size:22px}
+.menu-title,.nav span{display:none}
+.nav{text-align:center;font-size:18px;padding:14px 4px}
+.main{margin-left:68px;padding:22px 4%}
+.hero{padding:22px}
+.setting{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+<div class="logo">MindSolve <span>AI.</span></div>
+<div class="menu-title">MAIN MENU</div>
+<a class="nav" href="/dashboard">🏠 <span>Dashboard</span></a>
+<a class="nav" href="/doubt-solver">🤖 <span>AI Doubt Solver</span></a>
+<a class="nav" href="/image-solver">📷 <span>Image Solver</span></a>
+<a class="nav" href="/subjects">📚 <span>Subjects</span></a>
+<a class="nav" href="/history">🕘 <span>Chat History</span></a>
+<div class="menu-title">ACCOUNT</div>
+<a class="nav" href="/profile">👤 <span>My Profile</span></a>
+<a class="nav active" href="/settings">⚙️ <span>Settings</span></a>
+<a class="nav" href="/pricing">⭐ <span>Premium Plans</span></a>
+</aside>
+
+<main class="main">
+<header>
+<div><h2>Settings</h2><p>Customize your MindSolve AI experience</p></div>
+<div class="avatar">🎓</div>
+</header>
+
+<section class="hero">
+<small>✦ YOUR PREFERENCES</small>
+<h1>Make MindSolve Yours ⚙️</h1>
+<p>Manage your app preferences and choose how you want to learn.</p>
+</section>
+
+<section class="panel">
+<h3>🔔 Notifications</h3>
+<p class="desc">Choose which notifications you want to receive.</p>
+<div class="setting">
+<div><b>Daily Learning Reminder</b><small>Get a reminder to study every day.</small></div>
+<input type="checkbox" id="daily" checked>
+</div>
+<div class="setting">
+<div><b>Study Streak Alerts</b><small>Get notified about your learning streak.</small></div>
+<input type="checkbox" id="streak" checked>
+</div>
+<div class="setting">
+<div><b>Study Tips</b><small>Receive useful tips for better learning.</small></div>
+<input type="checkbox" id="tips">
+</div>
+</section>
+
+<section class="panel">
+<h3>🎨 Appearance</h3>
+<p class="desc">Choose your preferred interface appearance.</p>
+<div class="setting">
+<div><b>Theme</b><small>Select your preferred theme.</small></div>
+<select id="theme">
+<option value="dark">Dark Theme</option>
+<option value="light">Light Theme (Coming Soon)</option>
+</select>
+</div>
+</section>
+
+<section class="panel">
+<h3>📚 Learning Preferences</h3>
+<p class="desc">Set your learning experience.</p>
+<div class="setting">
+<div><b>Answer Language</b><small>Choose the language for AI explanations.</small></div>
+<select id="language">
+<option>Simple English</option>
+<option>Hinglish</option>
+<option>Hindi</option>
+</select>
+</div>
+<div class="setting">
+<div><b>Explanation Style</b><small>Choose how detailed your answers should be.</small></div>
+<select id="style">
+<option>Step by Step</option>
+<option>Short and Simple</option>
+<option>Detailed Explanation</option>
+</select>
+</div>
+</section>
+
+<section class="panel">
+<h3>🔐 Account</h3>
+<p class="desc">Manage your account access.</p>
+<div class="setting">
+<div><b>My Profile</b><small>Update your personal information.</small></div>
+<a href="/profile" style="color:#c4b5fd">Open Profile →</a>
+</div>
+<div class="setting">
+<div><b>Logout</b><small>Sign out from your MindSolve AI account.</small></div>
+<a href="/logout" style="color:#fda4af">Logout →</a>
+</div>
+</section>
+
+<section class="panel danger">
+<h3>⚠️ Danger Zone</h3>
+<p class="desc">Be careful with account-related actions.</p>
+<div class="setting">
+<div><b>Delete Account</b><small>Account deletion is not available yet.</small></div>
+<button type="button" onclick="alert('Account deletion is not enabled yet.')">Delete Account</button>
+</div>
+</section>
+
+<button class="save" id="save">Save Preferences</button>
+<p id="message"></p>
+<footer>© 2026 MindSolve AI · Learn Smarter. Grow Faster.</footer>
+</main>
+
+<script>
+const ids = ["daily","streak","tips","theme","language","style"];
+
+ids.forEach(id => {
+    const saved = localStorage.getItem("mindsolve_" + id);
+    const element = document.getElementById(id);
+    if(saved !== null){
+        if(element.type === "checkbox") element.checked = saved === "true";
+        else element.value = saved;
+    }
+});
+
+document.getElementById("save").addEventListener("click", function(){
+    ids.forEach(id => {
+        const element = document.getElementById(id);
+        const value = element.type === "checkbox" ? element.checked : element.value;
+        localStorage.setItem("mindsolve_" + id, value);
+    });
+    document.getElementById("message").textContent =
+        "✓ Preferences saved on this browser!";
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | MindSolve AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#f8fafc;min-height:100vh}
+a{color:inherit;text-decoration:none}
+nav{height:75px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #202a40;background:#0d1223}
+.logo{font-size:23px;font-weight:800;color:#a78bfa}
+.logo span{color:white}
+.back{font-size:13px;color:#c4b5fd}
+main{max-width:1050px;margin:45px auto;padding:0 22px}
+.heading{text-align:center;margin-bottom:35px}
+.heading small{color:#a78bfa;letter-spacing:2px}
+.heading h1{font-size:32px;margin:12px 0}
+.heading p{color:#94a3b8;font-size:14px}
+.checkout{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+.panel{background:#11182a;border:1px solid #283650;border-radius:16px;padding:27px}
+.panel h2{font-size:19px;margin-bottom:22px}
+label{display:block;color:#aab5ca;font-size:12px;margin:17px 0 8px}
+input,select{width:100%;padding:14px;background:#0b1222;border:1px solid #303c55;border-radius:9px;color:white;outline:none}
+input:focus,select:focus{border-color:#8b5cf6}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan{border:1px solid #303c55;border-radius:11px;padding:17px;cursor:pointer;background:#0d1426}
+.plan.selected{border-color:#8b5cf6;background:#211943}
+.plan input{width:auto;margin-right:7px;accent-color:#8b5cf6}
+.plan strong{display:block;margin:10px 0 5px}
+.plan small{color:#94a3b8;font-size:11px}
+.summary{background:linear-gradient(150deg,#211943,#11182a)}
+.summary .line{display:flex;justify-content:space-between;gap:15px;padding:15px 0;border-bottom:1px solid #30304b;color:#cbd5e1;font-size:13px}
+.summary .total{font-size:21px;font-weight:800;color:white;border:0}
+.summary .total span{color:#c4b5fd}
+.pay{width:100%;margin-top:20px;padding:15px;border:0;border-radius:10px;background:linear-gradient(100deg,#7c3aed,#4f46e5);color:white;font-size:14px;font-weight:700;cursor:pointer}
+.pay:hover{opacity:.9}
+.secure{text-align:center;color:#94a3b8;font-size:11px;line-height:1.7;margin-top:15px}
+.notice{color:#fcd34d;font-size:12px;line-height:1.7;margin-top:18px;background:#302713;padding:13px;border-radius:9px}
+footer{text-align:center;color:#64748b;font-size:12px;padding:35px}
+@media(max-width:750px){.checkout{grid-template-columns:1fr}.heading h1{font-size:26px}.panel{padding:20px}}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">MindSolve <span>AI.</span></div>
+<a class="back" href="/pricing">← Back to Plans</a>
+</nav>
+
+<main>
+<section class="heading">
+<small>✦ SECURE CHECKOUT</small>
+<h1>Complete Your Upgrade 🚀</h1>
+<p>Choose your plan and review your order.</p>
+</section>
+
+<div class="checkout">
+<section class="panel">
+<h2>1. Select Your Plan</h2>
+<div class="plans">
+<label class="plan selected" id="proCard">
+<input type="radio" name="plan" value="pro" checked>
+<strong>Pro Student</strong>
+<small>₹199 / month</small>
+</label>
+<label class="plan" id="ultimateCard">
+<input type="radio" name="plan" value="ultimate">
+<strong>Ultimate</strong>
+<small>₹399 / month</small>
+</label>
+</div>
+
+<h2 style="margin-top:30px">2. Billing Information</h2>
+<form id="checkoutForm">
+<label for="name">Full Name</label>
+<input id="name" type="text" placeholder="Enter your full name" required>
+
+<label for="email">Email Address</label>
+<input id="email" type="email" placeholder="Enter your email" required>
+
+<label for="period">Billing Period</label>
+<select id="period">
+<option value="monthly">Monthly</option>
+<option value="yearly">Yearly</option>
+</select>
+
+<button class="pay" type="submit">Continue to Payment →</button>
+</form>
+<p class="secure">🔒 Your payment details will be handled by the payment provider when integration is enabled.</p>
+</section>
+
+<aside class="panel summary">
+<h2>Order Summary</h2>
+<div class="line"><span>Selected Plan</span><strong id="planName">Pro Student</strong></div>
+<div class="line"><span>Billing</span><span id="billing">Monthly</span></div>
+<div class="line"><span>Plan Price</span><span id="price">₹199</span></div>
+<div class="line"><span>Discount</span><span>₹0</span></div>
+<div class="line total"><span>Total</span><span id="total">₹199</span></div>
+<div class="notice">Demo checkout only. No money will be charged. Payment processing is not connected yet.</div>
+<a href="/pricing" style="display:block;text-align:center;color:#c4b5fd;margin-top:20px;font-size:13px">Change Plan</a>
+</aside>
+</div>
+<footer>© 2026 MindSolve AI · Learn Smarter. Grow Faster.</footer>
+</main>
+
+<script>
+let selectedPlan = "pro";
+
+function updateSummary(){
+    const yearly = document.getElementById("period").value === "yearly";
+    const amount = selectedPlan === "pro"
+        ? (yearly ? 1999 : 199)
+        : (yearly ? 3999 : 399);
+
+    document.getElementById("planName").textContent =
+        selectedPlan === "pro" ? "Pro Student" : "Ultimate";
+    document.getElementById("billing").textContent =
+        yearly ? "Yearly" : "Monthly";
+    document.getElementById("price").textContent = "₹" + amount.toLocaleString("en-IN");
+    document.getElementById("total").textContent = "₹" + amount.toLocaleString("en-IN");
+}
+
+document.querySelectorAll('input[name="plan"]').forEach(input=>{
+    input.addEventListener("change",()=>{
+        selectedPlan = input.value;
+        document.getElementById("proCard").classList.toggle("selected",selectedPlan==="pro");
+        document.getElementById("ultimateCard").classList.toggle("selected",selectedPlan==="ultimate");
+        updateSummary();
+    });
+});
+
+document.getElementById("period").addEventListener("change",updateSummary);
+
+document.getElementById("checkoutForm").addEventListener("submit",event=>{
+    event.preventDefault();
+    alert("Checkout design is ready! Actual payment integration will be connected next.");
+});
+
+updateSummary();
+</script>
+</body>
+</html>

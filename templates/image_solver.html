@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Solver | MindSolve AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#f8fafc}
+a{text-decoration:none;color:inherit}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;position:fixed;height:100vh;background:#0d1223;border-right:1px solid #202a40;padding:28px 17px}
+.logo{font-size:23px;font-weight:800;color:#a78bfa;padding:0 10px 35px}
+.logo span{color:white}
+.menu-title{font-size:11px;color:#64748b;letter-spacing:1px;margin:18px 10px}
+.nav{display:block;padding:13px 12px;border-radius:9px;color:#aab5ca;font-size:14px;margin:5px 0}
+.nav:hover,.nav.active{background:#38286e;color:white}
+.main{margin-left:245px;width:calc(100% - 245px);padding:35px 5%}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:35px}
+.top h2{font-size:23px}
+.top p{color:#94a3b8;font-size:13px;margin-top:5px}
+.avatar{width:43px;height:43px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#2563eb);display:grid;place-items:center}
+.hero{text-align:center;padding:30px 10px}
+.tag{font-size:12px;letter-spacing:2px;color:#c4b5fd;margin-bottom:17px}
+.hero h1{font-size:clamp(30px,5vw,43px);margin-bottom:14px}
+.hero h1 span{color:#a78bfa}
+.hero p{color:#94a3b8;line-height:1.7;font-size:14px;max-width:650px;margin:auto}
+.upload-card{max-width:800px;margin:25px auto;background:#11182a;border:1px solid #303c59;border-radius:19px;padding:25px}
+.dropzone{border:2px dashed #58628a;border-radius:15px;padding:45px 20px;text-align:center;background:#0b1120;cursor:pointer;transition:.25s}
+.dropzone:hover,.dropzone.dragover{border-color:#a78bfa;background:#171632}
+.upload-icon{font-size:48px;margin-bottom:16px}
+.dropzone h3{font-size:18px;margin-bottom:10px}
+.dropzone p{color:#94a3b8;font-size:13px;line-height:1.7}
+.browse{display:inline-block;margin-top:18px;background:#7045d5;color:white;border-radius:8px;padding:11px 19px;font-size:13px;font-weight:700}
+#imageInput{display:none}
+.preview-wrap{display:none;margin-top:20px;text-align:center}
+.preview-wrap img{max-width:100%;max-height:350px;object-fit:contain;border-radius:12px;border:1px solid #394665}
+.file-name{color:#aebbd1;font-size:12px;margin-top:10px}
+.controls{margin-top:22px}
+.controls label{font-size:13px;display:block;margin-bottom:10px}
+select{width:100%;padding:13px;border-radius:9px;background:#0b1120;color:white;border:1px solid #34415e;outline:none}
+.action-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.hint{font-size:12px;color:#8190a9}
+button{border:0;border-radius:9px;padding:13px 20px;font-weight:700;cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-2px)}
+.solve{background:linear-gradient(135deg,#8b5cf6,#4f46e5);color:white}
+.remove{background:#29344b;color:#dbeafe;margin-top:12px}
+.result{display:none;max-width:800px;margin:25px auto;padding:25px;background:#11182a;border:1px solid #55418a;border-radius:16px}
+.result h2{font-size:19px;color:#c4b5fd;margin-bottom:15px}
+.result p{font-size:14px;line-height:1.8;color:#dce4f2;white-space:pre-wrap}
+.status{display:none;text-align:center;color:#c4b5fd;padding:20px;font-size:14px}
+.info{max-width:800px;margin:30px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.info-card{padding:19px;background:#11182a;border:1px solid #27344d;border-radius:13px}
+.info-card b{display:block;margin:10px 0;font-size:14px}
+.info-card p{font-size:12px;color:#94a3b8;line-height:1.6}
+footer{text-align:center;color:#64748b;padding:35px 0 15px;font-size:12px}
+@media(max-width:750px){
+.sidebar{width:68px;padding:20px 7px}
+.logo{font-size:0;padding:10px 8px 30px}
+.logo:first-letter{font-size:22px}
+.menu-title,.nav span{display:none}
+.nav{text-align:center;font-size:18px;padding:14px 4px}
+.main{margin-left:68px;width:calc(100% - 68px);padding:22px 4%}
+.info{grid-template-columns:1fr}
+.upload-card{padding:15px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+<div class="logo">MindSolve <span>AI.</span></div>
+<div class="menu-title">MAIN MENU</div>
+<a class="nav" href="/dashboard">🏠 <span>Dashboard</span></a>
+<a class="nav" href="/doubt-solver">🤖 <span>AI Doubt Solver</span></a>
+<a class="nav active" href="/image-solver">📷 <span>Image Solver</span></a>
+<a class="nav" href="/subjects">📚 <span>Subjects</span></a>
+<a class="nav" href="/history">🕘 <span>Chat History</span></a>
+<div class="menu-title">ACCOUNT</div>
+<a class="nav" href="/profile">👤 <span>My Profile</span></a>
+<a class="nav" href="/settings">⚙️ <span>Settings</span></a>
+<a class="nav" href="/pricing">⭐ <span>Premium Plans</span></a>
+</aside>
+
+<main class="main">
+<header class="top">
+<div><h2>Image Solver</h2><p>Understand questions from your pictures</p></div>
+<div class="avatar">🎓</div>
+</header>
+
+<section class="hero">
+<div class="tag">✦ SMART IMAGE LEARNING</div>
+<h1>Upload. Ask. <span>Understand.</span></h1>
+<p>Take a picture of your homework, textbook or question paper. Upload it and get help understanding the question.</p>
+</section>
+
+<section class="upload-card">
+<div class="dropzone" id="dropzone">
+<div class="upload-icon">📸</div>
+<h3>Upload your question image</h3>
+<p>Drag and drop your image here, or choose a file from your device.</p>
+<p>Supported formats: JPG, PNG, WEBP · Maximum 10 MB</p>
+<label for="imageInput" class="browse">Choose Image</label>
+<input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp">
+</div>
+
+<div class="preview-wrap" id="previewWrap">
+<img id="preview" alt="Selected question preview">
+<div class="file-name" id="fileName"></div>
+<button type="button" class="remove" id="removeBtn">Remove Image ✕</button>
+</div>
+
+<div class="controls">
+<label for="subject">Select your subject</label>
+<select id="subject">
+<option value="General">General</option>
+<option value="Mathematics">Mathematics</option>
+<option value="Physics">Physics</option>
+<option value="Chemistry">Chemistry</option>
+<option value="Biology">Biology</option>
+<option value="Computer Science">Computer Science</option>
+<option value="English">English</option>
+<option value="Other">Other</option>
+</select>
+</div>
+
+<div class="action-row">
+<span class="hint">Upload a clear and readable picture.</span>
+<button class="solve" id="solveBtn" type="button">✨ Solve Image</button>
+</div>
+</section>
+
+<div class="status" id="status">✨ Preparing your image...</div>
+
+<section class="result" id="result">
+<h2>✨ AI Explanation</h2>
+<p id="resultText"></p>
+</section>
+
+<section class="info">
+<div class="info-card"><div>📷</div><b>Clear Pictures</b><p>Upload a readable image for better results.</p></div>
+<div class="info-card"><div>🧠</div><b>Understand Concepts</b><p>Get explanations that help you understand the topic.</p></div>
+<div class="info-card"><div>📖</div><b>Learn Step by Step</b><p>Study difficult questions at your own pace.</p></div>
+</section>
+
+<footer>© 2026 MindSolve AI · Learn Smarter. Grow Faster.</footer>
+</main>
+</div>
+
+<script>
+const input = document.getElementById("imageInput");
+const dropzone = document.getElementById("dropzone");
+const previewWrap = document.getElementById("previewWrap");
+const preview = document.getElementById("preview");
+const fileName = document.getElementById("fileName");
+const solveBtn = document.getElementById("solveBtn");
+const result = document.getElementById("result");
+const resultText = document.getElementById("resultText");
+let selectedFile = null;
+
+function showFile(file) {
+    if (!file) return;
+
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowed.includes(file.type)) {
+        alert("Please select a JPG, PNG or WEBP image.");
+        return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+        alert("Image must be smaller than 10 MB.");
+        return;
+    }
+
+    selectedFile = file;
+    preview.src = URL.createObjectURL(file);
+    fileName.textContent = file.name;
+    previewWrap.style.display = "block";
+    result.style.display = "none";
+}
+
+input.addEventListener("change", () => showFile(input.files[0]));
+
+dropzone.addEventListener("dragover", event => {
+    event.preventDefault();
+    dropzone.classList.add("dragover");
+});
+
+dropzone.addEventListener("dragleave", () => {
+    dropzone.classList.remove("dragover");
+});
+
+dropzone.addEventListener("drop", event => {
+    event.preventDefault();
+    dropzone.classList.remove("dragover");
+    showFile(event.dataTransfer.files[0]);
+});
+
+document.getElementById("removeBtn").addEventListener("click", () => {
+    selectedFile = null;
+    input.value = "";
+    preview.removeAttribute("src");
+    previewWrap.style.display = "none";
+    result.style.display = "none";
+});
+
+solveBtn.addEventListener("click", async () => {
+    if (!selectedFile) {
+        alert("Please upload an image first.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    formData.append("subject", document.getElementById("subject").value);
+
+    solveBtn.disabled = true;
+    solveBtn.textContent = "Analyzing...";
+    document.getElementById("status").style.display = "block";
+    result.style.display = "none";
+
+    try {
+        const response = await fetch("/api/solve-image", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Image solving is not connected yet.");
+        }
+
+        resultText.textContent = data.answer || "No explanation was returned.";
+        result.style.display = "block";
+        result.scrollIntoView({behavior: "smooth"});
+
+    } catch (error) {
+        resultText.textContent = error.message;
+        result.style.display = "block";
+        result.scrollIntoView({behavior: "smooth"});
+    } finally {
+        document.getElementById("status").style.display = "none";
+        solveBtn.disabled = false;
+        solveBtn.textContent = "✨ Solve Image";
+    }
+});
+</script>
+</body>
+</html>

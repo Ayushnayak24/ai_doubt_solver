@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Plans | MindSolve AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#f8fafc}
+a{text-decoration:none;color:inherit}
+.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0d1223;border-right:1px solid #202a40;padding:28px 17px}
+.logo{font-size:23px;font-weight:800;color:#a78bfa;padding:0 10px 35px}
+.logo span{color:white}
+.menu-title{font-size:11px;color:#64748b;letter-spacing:1px;margin:18px 10px}
+.nav{display:block;padding:13px 12px;border-radius:9px;color:#aab5ca;font-size:14px;margin:5px 0}
+.nav:hover,.nav.active{background:#38286e;color:white}
+.main{margin-left:245px;padding:35px 4%;max-width:1500px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+header p{color:#94a3b8;font-size:13px;margin-top:5px}
+.avatar{width:43px;height:43px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#2563eb);display:grid;place-items:center}
+.hero{text-align:center;padding:35px 20px 30px}
+.hero small{color:#c4b5fd;letter-spacing:2px}
+.hero h1{font-size:36px;margin:14px 0}
+.hero p{color:#94a3b8;font-size:14px;line-height:1.7}
+.toggle{display:flex;justify-content:center;align-items:center;gap:12px;margin:20px 0 32px;color:#cbd5e1;font-size:13px}
+.toggle button{background:#211a43;color:white;border:1px solid #6547ad;border-radius:20px;padding:9px 15px;cursor:pointer}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.plan{background:#11182a;border:1px solid #283650;border-radius:17px;padding:25px;position:relative;transition:.2s}
+.plan:hover{transform:translateY(-5px);border-color:#8b5cf6}
+.plan.featured{border:1px solid #8b5cf6;background:linear-gradient(160deg,#211943,#11182a)}
+.popular{position:absolute;right:18px;top:-12px;background:#8b5cf6;color:white;padding:6px 12px;border-radius:20px;font-size:10px;font-weight:700}
+.plan h2{font-size:21px;margin-bottom:9px}
+.plan .description{color:#94a3b8;font-size:12px;min-height:38px;line-height:1.5}
+.price{font-size:34px;font-weight:800;margin:20px 0 5px}
+.price small{font-size:12px;color:#94a3b8;font-weight:400}
+.note{font-size:11px;color:#94a3b8;margin-bottom:20px}
+.choose{display:block;width:100%;padding:13px;border-radius:9px;border:1px solid #6950a8;background:#211a43;color:white;text-align:center;font-weight:700;font-size:13px;cursor:pointer}
+.featured .choose{background:linear-gradient(100deg,#7c3aed,#4f46e5);border:0}
+.features{list-style:none;margin-top:24px}
+.features li{padding:11px 0;border-bottom:1px solid #283650;font-size:12px;color:#cbd5e1}
+.features li span{color:#a78bfa;margin-right:8px}
+.bottom{text-align:center;padding:35px 10px;color:#94a3b8;font-size:13px;line-height:1.8}
+footer{text-align:center;color:#64748b;font-size:12px;padding:25px 0}
+@media(max-width:1000px){.plans{grid-template-columns:1fr 1fr}.plan:last-child{grid-column:1/-1}}
+@media(max-width:750px){
+.sidebar{width:68px;padding:20px 7px}
+.logo{font-size:0;padding:10px 8px 30px}
+.logo:first-letter{font-size:22px}
+.menu-title,.nav span{display:none}
+.nav{text-align:center;font-size:18px;padding:14px 4px}
+.main{margin-left:68px;padding:22px 4%}
+.hero h1{font-size:27px}
+.plans{grid-template-columns:1fr}
+.plan:last-child{grid-column:auto}
+}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+<div class="logo">MindSolve <span>AI.</span></div>
+<div class="menu-title">MAIN MENU</div>
+<a class="nav" href="/dashboard">🏠 <span>Dashboard</span></a>
+<a class="nav" href="/doubt-solver">🤖 <span>AI Doubt Solver</span></a>
+<a class="nav" href="/image-solver">📷 <span>Image Solver</span></a>
+<a class="nav" href="/subjects">📚 <span>Subjects</span></a>
+<a class="nav" href="/history">🕘 <span>Chat History</span></a>
+<div class="menu-title">ACCOUNT</div>
+<a class="nav" href="/profile">👤 <span>My Profile</span></a>
+<a class="nav" href="/settings">⚙️ <span>Settings</span></a>
+<a class="nav active" href="/pricing">⭐ <span>Premium Plans</span></a>
+</aside>
+
+<main class="main">
+<header>
+<div><h2>Premium Plans</h2><p>Choose the right plan for your learning journey</p></div>
+<div class="avatar">🎓</div>
+</header>
+
+<section class="hero">
+<small>✦ INVEST IN YOUR FUTURE</small>
+<h1>Learn More. Achieve More. 🚀</h1>
+<p>Choose a plan that matches your goals. Start for free and upgrade whenever you are ready.</p>
+</section>
+
+<div class="toggle">
+<span>Monthly Plans</span>
+<button type="button" id="billing">Yearly Plans · Save More</button>
+</div>
+
+<section class="plans">
+<article class="plan">
+<h2>Free</h2>
+<p class="description">For students who want to explore AI learning.</p>
+<div class="price">₹0 <small>/ forever</small></div>
+<p class="note">No payment required</p>
+<a class="choose" href="/dashboard">Get Started Free</a>
+<ul class="features">
+<li><span>✓</span> Basic AI doubt solving</li>
+<li><span>✓</span> Limited daily questions</li>
+<li><span>✓</span> Basic subject library</li>
+<li><span>✓</span> Standard explanations</li>
+<li><span>✓</span> Student dashboard</li>
+</ul>
+</article>
+
+<article class="plan featured">
+<div class="popular">MOST POPULAR</div>
+<h2>Pro Student</h2>
+<p class="description">For serious students who want to learn faster.</p>
+<div class="price" id="proPrice">₹199 <small>/ month</small></div>
+<p class="note" id="proNote">Billed monthly</p>
+<a class="choose" href="/checkout">Choose Pro Plan</a>
+<ul class="features">
+<li><span>✓</span> More AI questions</li>
+<li><span>✓</span> Detailed step-by-step answers</li>
+<li><span>✓</span> Image doubt solving</li>
+<li><span>✓</span> Complete chat history</li>
+<li><span>✓</span> Personal study planner</li>
+<li><span>✓</span> Priority AI access</li>
+</ul>
+</article>
+
+<article class="plan">
+<h2>Ultimate</h2>
+<p class="description">For ambitious learners preparing for big goals.</p>
+<div class="price" id="ultimatePrice">₹399 <small>/ month</small></div>
+<p class="note" id="ultimateNote">Billed monthly</p>
+<a class="choose" href="/checkout">Choose Ultimate</a>
+<ul class="features">
+<li><span>✓</span> Everything in Pro</li>
+<li><span>✓</span> Advanced AI learning support</li>
+<li><span>✓</span> Exam preparation tools</li>
+<li><span>✓</span> Advanced study analytics</li>
+<li><span>✓</span> Smart revision assistance</li>
+<li><span>✓</span> Premium learning resources</li>
+</ul>
+</article>
+</section>
+
+<div class="bottom">
+<h3 style="color:white;margin-bottom:8px">Have questions about plans?</h3>
+Choose a plan according to your learning needs. You can start with the free plan.
+<br>Prices shown are proposed demo prices and payment is not active yet.
+</div>
+<footer>© 2026 MindSolve AI · Learn Smarter. Grow Faster.</footer>
+</main>
+
+<script>
+let yearly = false;
+document.getElementById("billing").addEventListener("click",function(){
+    yearly = !yearly;
+    document.getElementById("proPrice").innerHTML =
+        yearly ? '₹1,999 <small>/ year</small>' : '₹199 <small>/ month</small>';
+    document.getElementById("ultimatePrice").innerHTML =
+        yearly ? '₹3,999 <small>/ year</small>' : '₹399 <small>/ month</small>';
+    document.getElementById("proNote").textContent =
+        yearly ? 'Yearly billing' : 'Billed monthly';
+    document.getElementById("ultimateNote").textContent =
+        yearly ? 'Yearly billing' : 'Billed monthly';
+    this.textContent = yearly ? 'Monthly Plans' : 'Yearly Plans · Save More';
+});
+</script>
+</body>
+</html>

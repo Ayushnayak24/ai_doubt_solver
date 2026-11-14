@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile | MindSolve AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#f8fafc}
+a{text-decoration:none;color:inherit}
+.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:#0d1223;border-right:1px solid #202a40;padding:28px 17px}
+.logo{font-size:23px;font-weight:800;color:#a78bfa;padding:0 10px 35px}
+.logo span{color:white}
+.menu-title{font-size:11px;color:#64748b;letter-spacing:1px;margin:18px 10px}
+.nav{display:block;padding:13px 12px;border-radius:9px;color:#aab5ca;font-size:14px;margin:5px 0}
+.nav:hover,.nav.active{background:#38286e;color:white}
+.main{margin-left:245px;padding:35px 5%;max-width:1500px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+header p{color:#94a3b8;font-size:13px;margin-top:5px}
+.avatar-small{width:43px;height:43px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#2563eb);display:grid;place-items:center}
+.hero{background:linear-gradient(120deg,#191d3b,#172344);border:1px solid #37345f;border-radius:18px;padding:30px;margin-bottom:25px}
+.hero small{color:#c4b5fd;letter-spacing:2px}
+.hero h1{font-size:28px;margin:12px 0}
+.hero p{color:#aab8cf;font-size:14px}
+.profile-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:20px}
+.panel{background:#11182a;border:1px solid #283650;border-radius:15px;padding:25px}
+.profile-center{text-align:center}
+.avatar-big{width:90px;height:90px;border-radius:50%;margin:5px auto 15px;background:linear-gradient(135deg,#8b5cf6,#2563eb);display:grid;place-items:center;font-size:35px}
+.profile-center h2{font-size:21px;margin-bottom:6px}
+.muted{color:#94a3b8;font-size:13px}
+.tag{display:inline-block;background:#29204c;color:#c4b5fd;border-radius:20px;padding:7px 14px;font-size:11px;margin-top:13px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
+.stat{background:#192238;padding:17px;border-radius:11px;text-align:center}
+.stat strong{display:block;font-size:22px;color:#c4b5fd}
+.stat span{font-size:11px;color:#94a3b8}
+.panel h3{font-size:18px;margin-bottom:20px}
+.field{margin-bottom:17px}
+.field label{display:block;color:#aab5ca;font-size:12px;margin-bottom:8px}
+.field input,.field select{width:100%;padding:13px;background:#0b1222;border:1px solid #303c55;border-radius:9px;color:white;outline:none}
+.field input:focus,.field select:focus{border-color:#8b5cf6}
+.save{background:linear-gradient(100deg,#7c3aed,#4f46e5);border:0;color:white;padding:13px 22px;border-radius:9px;font-weight:700;cursor:pointer}
+.save:hover{opacity:.9}
+.notice{font-size:12px;color:#94a3b8;margin-top:13px}
+footer{text-align:center;color:#64748b;font-size:12px;padding:35px 0}
+@media(max-width:850px){.profile-grid{grid-template-columns:1fr}}
+@media(max-width:750px){
+.sidebar{width:68px;padding:20px 7px}
+.logo{font-size:0;padding:10px 8px 30px}
+.logo:first-letter{font-size:22px}
+.menu-title,.nav span{display:none}
+.nav{text-align:center;font-size:18px;padding:14px 4px}
+.main{margin-left:68px;padding:22px 4%}
+.hero{padding:22px}
+}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+<div class="logo">MindSolve <span>AI.</span></div>
+<div class="menu-title">MAIN MENU</div>
+<a class="nav" href="/dashboard">🏠 <span>Dashboard</span></a>
+<a class="nav" href="/doubt-solver">🤖 <span>AI Doubt Solver</span></a>
+<a class="nav" href="/image-solver">📷 <span>Image Solver</span></a>
+<a class="nav" href="/subjects">📚 <span>Subjects</span></a>
+<a class="nav" href="/history">🕘 <span>Chat History</span></a>
+<div class="menu-title">ACCOUNT</div>
+<a class="nav active" href="/profile">👤 <span>My Profile</span></a>
+<a class="nav" href="/settings">⚙️ <span>Settings</span></a>
+<a class="nav" href="/pricing">⭐ <span>Premium Plans</span></a>
+</aside>
+
+<main class="main">
+<header>
+<div>
+<h2>My Profile</h2>
+<p>Manage your student information</p>
+</div>
+<div class="avatar-small">🎓</div>
+</header>
+
+<section class="hero">
+<small>✦ STUDENT ACCOUNT</small>
+<h1>Your Learning Profile 🎓</h1>
+<p>Keep your information updated and continue your learning journey with MindSolve AI.</p>
+</section>
+
+<div class="profile-grid">
+<section class="panel profile-center">
+<div class="avatar-big">👨‍🎓</div>
+<h2>Student</h2>
+<p class="muted">MindSolve AI Learner</p>
+<span class="tag">✦ Free Plan</span>
+
+<div class="stats">
+<div class="stat"><strong>0</strong><span>Questions Asked</span></div>
+<div class="stat"><strong>0</strong><span>Learning Streak</span></div>
+</div>
+<p class="notice">Your learning statistics will update when connected to your account data.</p>
+</section>
+
+<section class="panel">
+<h3>Personal Information</h3>
+<form id="profileForm">
+<div class="field">
+<label for="name">Full Name</label>
+<input id="name" type="text" placeholder="Enter your full name">
+</div>
+<div class="field">
+<label for="email">Email Address</label>
+<input id="email" type="email" placeholder="Enter your email" readonly>
+</div>
+<div class="field">
+<label for="course">Course / Class</label>
+<input id="course" type="text" placeholder="e.g. B.Tech CSE">
+</div>
+<div class="field">
+<label for="college">School / College</label>
+<input id="college" type="text" placeholder="Enter your school or college">
+</div>
+<div class="field">
+<label for="goal">Learning Goal</label>
+<select id="goal">
+<option value="">Select your goal</option>
+<option>School Exams</option>
+<option>Board Exams</option>
+<option>JEE Preparation</option>
+<option>NEET Preparation</option>
+<option>Engineering Studies</option>
+<option>Other</option>
+</select>
+</div>
+<button class="save" type="submit">Save Profile</button>
+<p class="notice" id="message">Profile editing will be connected to your account database next.</p>
+</form>
+</section>
+</div>
+<footer>© 2026 MindSolve AI · Learn Smarter. Grow Faster.</footer>
+</main>
+
+<script>
+document.getElementById("profileForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("message").textContent =
+    "Profile form is ready. Database saving will be connected in the next backend step.";
+});
+</script>
+</body>
+</html>

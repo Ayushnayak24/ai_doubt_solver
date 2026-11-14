@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Successful | MindSolve AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#f8fafc;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{width:100%;max-width:560px;text-align:center;background:linear-gradient(150deg,#171d35,#11182a);border:1px solid #354267;border-radius:22px;padding:45px 30px;box-shadow:0 20px 70px #0006}
+.logo{font-size:23px;font-weight:800;color:#a78bfa;margin-bottom:35px}
+.logo span{color:white}
+.check{width:85px;height:85px;border-radius:50%;background:#123e32;border:2px solid #34d399;color:#34d399;font-size:43px;display:grid;place-items:center;margin:0 auto 25px}
+h1{font-size:30px;margin-bottom:12px}
+.subtitle{color:#aab8cf;font-size:14px;line-height:1.7}
+.details{background:#0b1222;border:1px solid #283650;border-radius:13px;padding:20px;margin:28px 0;text-align:left}
+.line{display:flex;justify-content:space-between;gap:15px;padding:12px 0;border-bottom:1px solid #283650;font-size:13px}
+.line:last-child{border:0}
+.line span{color:#94a3b8}
+.line strong{color:white;text-align:right}
+.status{color:#34d399}
+button{width:100%;padding:15px;background:linear-gradient(100deg,#7c3aed,#4f46e5);border:0;border-radius:10px;color:white;font-size:14px;font-weight:700;cursor:pointer}
+button:hover{opacity:.9}
+.note{color:#94a3b8;font-size:12px;line-height:1.7;margin-top:20px}
+footer{color:#64748b;font-size:11px;margin-top:30px}
+@media(max-width:500px){.card{padding:35px 20px}h1{font-size:25px}}
+</style>
+</head>
+<body>
+<main class="card">
+<div class="logo">MindSolve <span>AI.</span></div>
+<div class="check">✓</div>
+<h1>Payment Successful!</h1>
+<p class="subtitle">Thank you for choosing MindSolve AI. Your payment confirmation will appear here after verified payment processing.</p>
+
+<section class="details">
+<div class="line"><span>Payment Status</span><strong class="status">Success</strong></div>
+<div class="line"><span>Plan</span><strong id="plan">Premium Plan</strong></div>
+<div class="line"><span>Order Reference</span><strong id="reference">Awaiting verification</strong></div>
+</section>
+
+<button onclick="window.location.href='/dashboard'">Go to Dashboard →</button>
+<p class="note">This is a demonstration success page. Do not treat this page alone as proof of payment. Your premium access must be activated only after server-side payment verification.</p>
+<footer>© 2026 MindSolve AI · Learn Smarter. Grow Faster.</footer>
+</main>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const plan = params.get("plan");
+const reference = params.get("reference");
+
+if(plan){
+    document.getElementById("plan").textContent =
+        plan.charAt(0).toUpperCase() + plan.slice(1);
+}
+if(reference){
+    document.getElementById("reference").textContent = reference;
+}
+</script>
+</body>
+</html>

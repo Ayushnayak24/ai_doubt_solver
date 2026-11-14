@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subjects | MindSolve AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#f8fafc}
+a{text-decoration:none;color:inherit}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;position:fixed;height:100vh;background:#0d1223;border-right:1px solid #202a40;padding:28px 17px}
+.logo{font-size:23px;font-weight:800;color:#a78bfa;padding:0 10px 35px}
+.logo span{color:white}
+.menu-title{font-size:11px;color:#64748b;letter-spacing:1px;margin:18px 10px}
+.nav{display:block;padding:13px 12px;border-radius:9px;color:#aab5ca;font-size:14px;margin:5px 0}
+.nav:hover,.nav.active{background:#38286e;color:white}
+.main{margin-left:245px;width:calc(100% - 245px);padding:35px 5%}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:35px}
+.top h2{font-size:23px}
+.top p{color:#94a3b8;font-size:13px;margin-top:5px}
+.avatar{width:43px;height:43px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#2563eb);display:grid;place-items:center}
+.hero{padding:35px;background:linear-gradient(120deg,#191d3b,#172344);border:1px solid #37345f;border-radius:18px;margin-bottom:35px}
+.hero small{color:#c4b5fd;letter-spacing:2px}
+.hero h1{font-size:34px;margin:15px 0}
+.hero p{color:#aab8cf;line-height:1.7;font-size:14px}
+.search{width:100%;margin-top:23px;padding:14px 16px;background:#0b1120;border:1px solid #35415e;border-radius:10px;color:white;outline:none;font-size:14px}
+.search:focus{border-color:#a78bfa}
+.section-title{font-size:20px;margin:32px 0 18px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.filter{background:#141d31;color:#aab8cf;border:1px solid #303c55;padding:9px 15px;border-radius:20px;cursor:pointer;font-size:12px}
+.filter.active,.filter:hover{background:#7045d5;color:white;border-color:#7045d5}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{background:#11182a;border:1px solid #283650;border-radius:15px;padding:22px;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:#8b5cf6}
+.icon{font-size:31px;margin-bottom:15px}
+.card h3{font-size:17px;margin-bottom:8px}
+.card p{color:#94a3b8;font-size:12px;line-height:1.7;min-height:40px}
+.card a{display:inline-block;margin-top:17px;color:#c4b5fd;font-size:13px;font-weight:700}
+.empty{display:none;color:#94a3b8;text-align:center;padding:30px;grid-column:1/-1}
+footer{text-align:center;color:#64748b;font-size:12px;padding:40px 0 15px}
+@media(max-width:950px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:750px){
+.sidebar{width:68px;padding:20px 7px}
+.logo{font-size:0;padding:10px 8px 30px}
+.logo:first-letter{font-size:22px}
+.menu-title,.nav span{display:none}
+.nav{text-align:center;font-size:18px;padding:14px 4px}
+.main{margin-left:68px;width:calc(100% - 68px);padding:22px 4%}
+.hero{padding:23px}
+.hero h1{font-size:26px}
+}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<div class="logo">MindSolve <span>AI.</span></div>
+<div class="menu-title">MAIN MENU</div>
+<a class="nav" href="/dashboard">🏠 <span>Dashboard</span></a>
+<a class="nav" href="/doubt-solver">🤖 <span>AI Doubt Solver</span></a>
+<a class="nav" href="/image-solver">📷 <span>Image Solver</span></a>
+<a class="nav active" href="/subjects">📚 <span>Subjects</span></a>
+<a class="nav" href="/history">🕘 <span>Chat History</span></a>
+<div class="menu-title">ACCOUNT</div>
+<a class="nav" href="/profile">👤 <span>My Profile</span></a>
+<a class="nav" href="/settings">⚙️ <span>Settings</span></a>
+<a class="nav" href="/pricing">⭐ <span>Premium Plans</span></a>
+</aside>
+
+<main class="main">
+<header class="top">
+<div><h2>Subjects & Resources</h2><p>Your complete learning library</p></div>
+<div class="avatar">🎓</div>
+</header>
+
+<section class="hero">
+<small>✦ EXPLORE. LEARN. ACHIEVE.</small>
+<h1>Discover Your Learning World 📚</h1>
+<p>Explore subjects, prepare for examinations and improve your knowledge with MindSolve AI.</p>
+<input class="search" id="search" placeholder="🔍 Search subjects, classes or exams...">
+</section>
+
+<h2 class="section-title">School Learning · Class 1–12</h2>
+<div class="filters">
+<button class="filter active" data-filter="all">All</button>
+<button class="filter" data-filter="school">School</button>
+<button class="filter" data-filter="jee">JEE</button>
+<button class="filter" data-filter="neet">NEET</button>
+<button class="filter" data-filter="engineering">Engineering</button>
+</div>
+
+<div class="grid" id="grid">
+
+<div class="card" data-category="school">
+<div class="icon">🔢</div><h3>Mathematics</h3>
+<p>Numbers, algebra, geometry, calculus and more.</p>
+<a href="/doubt-solver">Ask Maths Doubts →</a>
+</div>
+
+<div class="card" data-category="school">
+<div class="icon">⚛️</div><h3>Physics</h3>
+<p>Motion, electricity, optics, mechanics and concepts.</p>
+<a href="/doubt-solver">Ask Physics Doubts →</a>
+</div>
+
+<div class="card" data-category="school">
+<div class="icon">🧪</div><h3>Chemistry</h3>
+<p>Organic, inorganic and physical chemistry.</p>
+<a href="/doubt-solver">Ask Chemistry Doubts →</a>
+</div>
+
+<div class="card" data-category="school">
+<div class="icon">🧬</div><h3>Biology</h3>
+<p>Cell biology, genetics, human body and life sciences.</p>
+<a href="/doubt-solver">Ask Biology Doubts →</a>
+</div>
+
+<div class="card" data-category="school">
+<div class="icon">💻</div><h3>Computer Science</h3>
+<p>Programming, computer fundamentals and technology.</p>
+<a href="/doubt-solver">Ask CS Doubts →</a>
+</div>
+
+<div class="card" data-category="school">
+<div class="icon">📖</div><h3>English</h3>
+<p>Grammar, writing, vocabulary and literature.</p>
+<a href="/doubt-solver">Ask English Doubts →</a>
+</div>
+
+<div class="card" data-category="jee">
+<div class="icon">🎯</div><h3>JEE Preparation</h3>
+<p>Prepare Physics, Chemistry and Mathematics for JEE.</p>
+<a href="/doubt-solver">Practice JEE Questions →</a>
+</div>
+
+<div class="card" data-category="neet">
+<div class="icon">🩺</div><h3>NEET Preparation</h3>
+<p>Study Biology, Physics and Chemistry for NEET.</p>
+<a href="/doubt-solver">Practice NEET Questions →</a>
+</div>
+
+<div class="card" data-category="school">
+<div class="icon">🏫</div><h3>Board Examinations</h3>
+<p>Prepare for CBSE, ICSE and state board examinations.</p>
+<a href="/doubt-solver">Prepare for Boards →</a>
+</div>
+
+<div class="card" data-category="engineering">
+<div class="icon">⚙️</div><h3>Engineering Mathematics</h3>
+<p>Calculus, matrices, differential equations and algebra.</p>
+<a href="/doubt-solver">Study Engineering Maths →</a>
+</div>
+
+<div class="card" data-category="engineering">
+<div class="icon">🔌</div><h3>Engineering Physics</h3>
+<p>Waves, optics, quantum physics and electronics.</p>
+<a href="/doubt-solver">Study Engineering Physics →</a>
+</div>
+
+<div class="card" data-category="engineering">
+<div class="icon">⌨️</div><h3>Programming & CSE</h3>
+<p>C programming, data structures, algorithms and more.</p>
+<a href="/doubt-solver">Study Programming →</a>
+</div>
+
+<div class="empty" id="empty">No matching subjects found.</div>
+</div>
+
+<footer>© 2026 MindSolve AI · Learn Smarter. Grow Faster.</footer>
+</main>
+</div>
+
+<script>
+const search = document.getElementById("search");
+const cards = [...document.querySelectorAll(".card")];
+const filters = [...document.querySelectorAll(".filter")];
+const empty = document.getElementById("empty");
+let activeFilter = "all";
+
+function updateCards(){
+    const term = search.value.toLowerCase().trim();
+    let visible = 0;
+
+    cards.forEach(card => {
+        const matchesText = card.innerText.toLowerCase().includes(term);
+        const matchesCategory = activeFilter === "all" || card.dataset.category === activeFilter;
+        const show = matchesText && matchesCategory;
+        card.style.display = show ? "block" : "none";
+        if(show) visible++;
+    });
+
+    empty.style.display = visible ? "none" : "block";
+}
+
+search.addEventListener("input", updateCards);
+
+filters.forEach(button => {
+    button.addEventListener("click", () => {
+        filters.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        activeFilter = button.dataset.filter;
+        updateCards();
+    });
+});
+</script>
+</body>
+</html>

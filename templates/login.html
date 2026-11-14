@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | MindSolve AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Segoe UI,Arial,sans-serif;background:#080b18;color:#f8fafc;min-height:100vh;display:grid;place-items:center;padding:20px}
+.container{width:100%;max-width:950px;display:grid;grid-template-columns:1fr 1fr;background:#11182a;border:1px solid #283650;border-radius:22px;overflow:hidden;box-shadow:0 25px 80px #0007}
+.left{padding:50px 38px;background:linear-gradient(145deg,#211943,#11182a);display:flex;flex-direction:column;justify-content:center}
+.logo{font-size:25px;font-weight:800;color:#c4b5fd;margin-bottom:55px}
+.logo span{color:white}
+.left h1{font-size:36px;line-height:1.2;margin-bottom:18px}
+.left p{font-size:14px;line-height:1.8;color:#b5bfd2}
+.features{margin-top:35px;display:grid;gap:18px}
+.feature{font-size:13px;color:#dbe3f4}
+.feature span{color:#a78bfa;margin-right:10px}
+.right{padding:50px 42px;display:flex;flex-direction:column;justify-content:center}
+.right h2{font-size:28px;margin-bottom:9px}
+.subtitle{color:#94a3b8;font-size:13px;margin-bottom:30px}
+label{display:block;color:#cbd5e1;font-size:12px;margin-bottom:9px}
+input{width:100%;padding:14px;background:#0b1222;border:1px solid #303c55;border-radius:9px;color:white;outline:none;margin-bottom:19px}
+input:focus{border-color:#8b5cf6}
+.password-wrap{position:relative}
+.password-wrap input{padding-right:65px}
+.show{position:absolute;right:12px;top:14px;background:none;border:0;color:#c4b5fd;cursor:pointer;font-size:11px}
+.options{display:flex;justify-content:space-between;align-items:center;margin:0 0 23px;font-size:12px;color:#aab5ca}
+.options a,.signup a{color:#c4b5fd;text-decoration:none}
+.remember{display:flex;align-items:center;gap:7px}
+.remember input{width:auto;margin:0;accent-color:#8b5cf6}
+button.submit{width:100%;padding:15px;border:0;border-radius:9px;background:linear-gradient(100deg,#7c3aed,#4f46e5);color:white;font-weight:700;font-size:14px;cursor:pointer}
+button.submit:hover{opacity:.9}
+button:disabled{opacity:.6;cursor:wait}
+.message{font-size:12px;color:#fda4af;margin-top:15px;line-height:1.6;min-height:18px}
+.signup{text-align:center;color:#94a3b8;font-size:13px;margin-top:25px}
+.back{text-align:center;margin-top:25px;color:#94a3b8;font-size:12px}
+.back a{color:#c4b5fd;text-decoration:none}
+@media(max-width:750px){
+.container{grid-template-columns:1fr}
+.left{padding:28px}
+.left .logo{margin-bottom:25px}
+.left h1{font-size:27px}
+.features{display:none}
+.right{padding:35px 27px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<section class="left">
+<div class="logo">MindSolve <span>AI.</span></div>
+<h1>Welcome Back,<br>Future Achiever! 🚀</h1>
+<p>Your learning journey continues here. Ask questions, understand concepts and achieve your academic goals with AI.</p>
+<div class="features">
+<div class="feature"><span>✦</span> Smart AI Doubt Solver</div>
+<div class="feature"><span>✦</span> Personal Learning Dashboard</div>
+<div class="feature"><span>✦</span> Learn at Your Own Pace</div>
+</div>
+</section>
+
+<section class="right">
+<h2>Login to MindSolve</h2>
+<p class="subtitle">Enter your account details to continue learning.</p>
+
+<form id="loginForm">
+<label for="email">Email Address</label>
+<input type="email" id="email" placeholder="Enter your email" required autocomplete="email">
+
+<label for="password">Password</label>
+<div class="password-wrap">
+<input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+<button type="button" class="show" id="showPassword">SHOW</button>
+</div>
+
+<div class="options">
+<label class="remember"><input type="checkbox" id="remember"> Remember me</label>
+<a href="/forgot-password">Forgot password?</a>
+</div>
+
+<button type="submit" class="submit" id="loginButton">Login to Account →</button>
+<p class="message" id="message" role="alert"></p>
+</form>
+
+<p class="signup">Don't have an account? <a href="/register">Create Account</a></p>
+<div class="back"><a href="/">← Back to Home</a></div>
+</section>
+</div>
+
+<script>
+const form = document.getElementById("loginForm");
+const message = document.getElementById("message");
+const loginButton = document.getElementById("loginButton");
+
+document.getElementById("showPassword").addEventListener("click",function(){
+    const password = document.getElementById("password");
+    password.type = password.type === "password" ? "text" : "password";
+    this.textContent = password.type === "password" ? "SHOW" : "HIDE";
+});
+
+form.addEventListener("submit",async function(event){
+    event.preventDefault();
+
+    message.textContent = "";
+    loginButton.disabled = true;
+    loginButton.textContent = "Logging in...";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try{
+        const response = await fetch("/api/login",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({email,password})
+        });
+
+        const data = await response.json();
+
+        if(response.ok){
+            message.style.color = "#34d399";
+            message.textContent = "Login successful! Opening dashboard...";
+            window.location.href = data.redirect || "/dashboard";
+        }else{
+            message.style.color = "#fda4af";
+            message.textContent = data.error || data.message || "Invalid email or password.";
+            loginButton.disabled = false;
+            loginButton.textContent = "Login to Account →";
+        }
+    }catch(error){
+        message.style.color = "#fda4af";
+        message.textContent = "Server connection failed. Please check whether Flask is running.";
+        loginButton.disabled = false;
+        loginButton.textContent = "Login to Account →";
+    }
+});
+</script>
+</body>
+</html>
