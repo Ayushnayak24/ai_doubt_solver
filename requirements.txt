@@ -3,3 +3,5 @@ Flask
 python-dotenv
 openai
 razorpay
+google-genai
+gunicorn
